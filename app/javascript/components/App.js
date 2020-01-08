@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Todo from './Todo';
+import styled from 'styled-components';
 
+const Body = styled.div`
+  background: #F5F5F5;
+`
 class App extends Component {
   constructor(props) {
     super(props)
@@ -15,9 +19,9 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <Body>
         <Todo todos={this.state.tasks} />
-      </div>
+      </Body>
     )
   };
 };
