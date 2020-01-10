@@ -17,10 +17,23 @@ class App extends Component {
       ]
     }
   }
+  markComplete = (id) => {
+    console.log(id)
+    this.setState({
+      tasks: this.state.tasks.map(todo => {
+        if(todo.id === id) {
+          todo.completed = !todo.completed
+        }
+        return todo;
+      })
+    })
+    console.log(this.state.tasks.filter(f => f.id === id))
+  }
   render() {
     return (
       <Body>
-        <Todo todos={this.state.tasks} />
+        <h1 className="text-center mt-3">My To-do List</h1>
+        <Todo todos={this.state.tasks} markComplete={this.markComplete} />
       </Body>
     )
   };
