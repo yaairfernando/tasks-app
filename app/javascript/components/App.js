@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import styled from 'styled-components';
-// import uuid from 'uuid';
+import uuid from 'uuid';
 import axios from 'axios';
 
 import Todo from './Todo';
@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://jsonplaceholder.typicode.com/todos?_limit=5')
+    axios.get('http://jsonplaceholder.typicode.com/todos?_limit=1')
       .then((data) => {
         this.setState({
           tasks: data.data
@@ -72,16 +72,14 @@ class App extends Component {
     // this.setState({ tasks: [...this.state.tasks, newTodo]})
 
     axios.post('http://jsonplaceholder.typicode.com/todos', {
+      id: uuid.v4(),
       title,
       description,
       completed: false
     })
     .then((data) => {
-      this.setState({
-        tasks: [...this.state.tasks, data.data]
-      })
+      this.setState({ tasks: [...this.state.tasks, data.data] })
     })
-    
   }
 
 
