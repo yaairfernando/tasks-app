@@ -7,6 +7,9 @@ const Card = styled.div`
   width: 50%;
   margin: 0 auto;
   box-shadow: 0 0 7px rgba(0,0,0,0.25);
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 export class TodoListItem extends Component {
