@@ -1,6 +1,5 @@
 import React, { Component} from 'react';
 import TodoListItem from './TodoListItem';
-import TodoCreate from './TodoCreate';
 import PropTypes from 'prop-types';
 
 class Todo extends Component {
@@ -14,7 +13,6 @@ class Todo extends Component {
     })
     return(
       <div className="container px-4">
-        <TodoCreate />
         <div className="mt-5">
           {tasks}
         </div>

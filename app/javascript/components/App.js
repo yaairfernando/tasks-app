@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Todo from './Todo';
 import Header from './Layout/Header';
 import styled from 'styled-components';
+import TodoCreate from './TodoCreate';
 
 const Body = styled.div`
   background: #916dd5;
@@ -36,10 +37,22 @@ class App extends Component {
     this.setState({ tasks: newState });
   }
 
+  addTodo = (title, description) => {
+    const newTodo = {
+      id: 4,
+      title,
+      description,
+      completed: false
+    }
+    this.setState({ tasks: [...this.state.tasks, newTodo]})
+  }
+
+
   render() {
     return (
       <Body>
         <Header />
+        <TodoCreate addTodo={this.addTodo} />
         <Todo 
           todos={this.state.tasks} 
           markComplete={this.markComplete} 
