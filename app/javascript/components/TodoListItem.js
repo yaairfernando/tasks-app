@@ -25,9 +25,12 @@ export class TodoListItem extends Component {
       <Card className="card mb-3">
         <div className="card-body d-flex justify-content-between align-items-center" style={this.getStyle()}>
           <input type="checkbox" className="ml-2 mr-5" onChange={this.props.markComplete.bind(this, id)} />
-          <div className="w-100">
-            <h5 className="card-title mb-0">{title}</h5>
-            <p className="card-text">{description}</p>
+          <div className="w-100 d-flex justify-content-between align-items-center">
+            <div>
+              <h5 className="card-title mb-0">{title}</h5>
+              <p className="card-text">{description}</p>
+            </div>
+            <button className="btn btn-danger" onClick={this.props.deleteTask.bind(this, id)}>X</button>
           </div>
         </div>
       </Card>

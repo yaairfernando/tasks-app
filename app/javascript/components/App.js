@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Todo from './Todo';
+import Header from './Layout/Header';
 import styled from 'styled-components';
 
 const Body = styled.div`
-  background: #F5F5F5;
+  background: #916dd5;
 `
 class App extends Component {
   constructor(props) {
@@ -29,11 +30,21 @@ class App extends Component {
     })
     console.log(this.state.tasks.filter(f => f.id === id))
   }
+
+  deleteTask = (id) => {
+    let newState = this.state.tasks.filter(f => f.id != id)
+    this.setState({ tasks: newState });
+  }
+
   render() {
     return (
       <Body>
-        <h1 className="text-center mt-3">My To-do List</h1>
-        <Todo todos={this.state.tasks} markComplete={this.markComplete} />
+        <Header />
+        <Todo 
+          todos={this.state.tasks} 
+          markComplete={this.markComplete} 
+          deleteTask={this.deleteTask}
+        />
       </Body>
     )
   };
