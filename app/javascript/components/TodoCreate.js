@@ -11,13 +11,6 @@ const Input = styled.input`
   margin-bottom: 10px;
 `
 
-// const Submit = styled.input`
-//   flex: 1;
-//   color: #fff;
-//   font-size: 18px;
-//   background: #4a47a3;
-// `
-
 const Label = styled.label`
   color: #fff;
   font-size: 14px;

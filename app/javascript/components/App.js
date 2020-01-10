@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Todo from './Todo';
 import Header from './Layout/Header';
 import styled from 'styled-components';
 import TodoCreate from './TodoCreate';
+import About from './pages/About';
 import uuid from 'uuid';
 
 const Body = styled.div`
@@ -21,7 +23,6 @@ class App extends Component {
     }
   }
   markComplete = (id) => {
-    console.log(id)
     this.setState({
       tasks: this.state.tasks.map(todo => {
         if(todo.id === id) {
@@ -30,7 +31,6 @@ class App extends Component {
         return todo;
       })
     })
-    console.log(this.state.tasks.filter(f => f.id === id))
   }
 
   deleteTask = (id) => {
@@ -51,15 +51,22 @@ class App extends Component {
 
   render() {
     return (
-      <Body>
-        <Header />
-        <TodoCreate addTodo={this.addTodo} />
-        <Todo 
-          todos={this.state.tasks} 
-          markComplete={this.markComplete} 
-          deleteTask={this.deleteTask}
-        />
-      </Body>
+      <Router>
+        <Body>
+          <Header />
+          <Route exact path="/" render={props => (
+            <React.Fragment>
+              <TodoCreate addTodo={this.addTodo} />
+              <Todo 
+                todos={this.state.tasks} 
+                markComplete={this.markComplete} 
+                deleteTask={this.deleteTask}
+              />
+            </React.Fragment>
+          )} />
+          <Route path="/about" component={About} />
+        </Body>
+      </Router>
     )
   };
 };

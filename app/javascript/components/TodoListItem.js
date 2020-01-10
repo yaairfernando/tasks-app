@@ -1,5 +1,4 @@
 import React, { Component} from 'react';
-// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Card = styled.div`
@@ -41,9 +40,6 @@ const Delete = styled.button`
 export class TodoListItem extends Component {
   getStyle = () => {
     return {
-      // background: '#f4f4f4',
-      // padding: '10px',
-      // borderBottom: '1px #ccc dotted',
       textDecoration: this.props.todo.completed ? 'line-through' : 'none'
     }
   }
@@ -68,9 +64,5 @@ export class TodoListItem extends Component {
     )
   }
 };
-
-// TodoListItem.propTypes = {
-//   todo: PropTypes.object.isRequired
-// }
 
 export default TodoListItem;
