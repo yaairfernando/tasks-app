@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Card = styled.div`
@@ -69,8 +69,8 @@ export class TodoListItem extends Component {
   }
 };
 
-TodoListItem.propTypes = {
-  todo: PropTypes.object.isRequired
-}
+// TodoListItem.propTypes = {
+//   todo: PropTypes.object.isRequired
+// }
 
 export default TodoListItem;

@@ -3,6 +3,7 @@ import Todo from './Todo';
 import Header from './Layout/Header';
 import styled from 'styled-components';
 import TodoCreate from './TodoCreate';
+import uuid from 'uuid';
 
 const Body = styled.div`
   background: #916dd5;
@@ -13,9 +14,9 @@ class App extends Component {
 
     this.state = {
       tasks: [
-        {id: 1, title: "This is a tak", description: "Go to the library", completed: false },
-        {id: 2, title: "I have to do this now", description: "Go to the gym", completed: false },
-        {id: 3, title: "I am in a hurry", description: "Cook some food", completed: false }
+        {id: uuid.v4(), title: "This is a tak", description: "Go to the library", completed: false },
+        {id: uuid.v4(), title: "I have to do this now", description: "Go to the gym", completed: false },
+        {id: uuid.v4(), title: "I am in a hurry", description: "Cook some food", completed: false }
       ]
     }
   }
@@ -39,7 +40,7 @@ class App extends Component {
 
   addTodo = (title, description) => {
     const newTodo = {
-      id: 4,
+      id: uuid.v4(),
       title,
       description,
       completed: false
