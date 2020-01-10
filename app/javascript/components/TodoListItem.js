@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
 
 const Card = styled.div`
   background: #fff;
@@ -64,5 +65,11 @@ export class TodoListItem extends Component {
     )
   }
 };
+
+TodoListItem.propTypes = {
+  deleteTask: propTypes.func.isRequired,
+  markComplete: propTypes.func.isRequired,
+  todo: propTypes.object.isRequired,
+}
 
 export default TodoListItem;

@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import TodoListItem from './TodoListItem';
+import propTypes from 'prop-types';
 
 class Todo extends Component {
   render() {
@@ -19,5 +20,11 @@ class Todo extends Component {
     )
   }
 };
+
+Todo.propTypes = {
+  todos: propTypes.array.isRequired,
+  markComplete: propTypes.func.isRequired,
+  deleteTask: propTypes.func.isRequired,
+}
 
 export default Todo;

@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
 
 const Input = styled.input`
   flex: 3;
@@ -68,5 +69,9 @@ class TodoCreate extends Component {
     )
   };
 };
+
+TodoCreate.propTypes = {
+  addTodo : propTypes.func.isRequired,
+}
 
 export default TodoCreate;
