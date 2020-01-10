@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import styled from 'styled-components';
+import uuid from 'uuid';
+import axios from 'axios';
+
 import Todo from './Todo';
 import Header from './Layout/Header';
-import styled from 'styled-components';
 import TodoCreate from './TodoCreate';
 import About from './pages/About';
-import uuid from 'uuid';
+
+
 
 const Body = styled.div`
   background: #916dd5;
@@ -16,12 +20,25 @@ class App extends Component {
 
     this.state = {
       tasks: [
-        {id: uuid.v4(), title: "This is a tak", description: "Go to the library", completed: false },
-        {id: uuid.v4(), title: "I have to do this now", description: "Go to the gym", completed: false },
-        {id: uuid.v4(), title: "I am in a hurry", description: "Cook some food", completed: false }
+        // {id: uuid.v4(), title: "This is a tak", description: "Go to the library", completed: false },
+        // {id: uuid.v4(), title: "I have to do this now", description: "Go to the gym", completed: false },
+        // {id: uuid.v4(), title: "I am in a hurry", description: "Cook some food", completed: false }
       ]
     }
   }
+
+  componentDidMount() {
+    axios.get('http://jsonplaceholder.typicode.com/todos?_limit=25')
+      .then((data) => {
+        this.setState({
+          tasks: data.data
+        })
+      })
+      .catch((data) =>{
+        console.log(data);
+      })
+  }
+
   markComplete = (id) => {
     this.setState({
       tasks: this.state.tasks.map(todo => {
