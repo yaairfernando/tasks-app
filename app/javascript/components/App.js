@@ -28,14 +28,27 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://jsonplaceholder.typicode.com/todos?_limit=1')
+    // Getting the data from jsonplaceholder
+    // axios.get('http://jsonplaceholder.typicode.com/todos?_limit=1')
+    //   .then((data) => {
+    //     this.setState({
+    //       tasks: data.data
+    //     })
+    //   })
+    //   .catch((data) =>{
+    //     console.log(data);
+    //   })
+
+    // Getting the data from the back with ruby
+    axios.get('/fetch_tasks.json')
       .then((data) => {
+        console.log(data)
         this.setState({
-          tasks: data.data
+          tasks: data.data.tasks
         })
       })
-      .catch((data) =>{
-        console.log(data);
+      .catch((data) => {
+        console.log(data)
       })
   }
 
