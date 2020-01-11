@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import styled from 'styled-components';
-import uuid from 'uuid';
+// import uuid from 'uuid';
 import axios from 'axios';
 
 import Todo from './Todo';
@@ -131,7 +131,6 @@ class App extends Component {
       description
     })
     .then((data) => {
-      console.log(data);
       const newItem = {
         title,
         description,
@@ -143,7 +142,6 @@ class App extends Component {
       this.setState({
         tasks: [...this.state.tasks, newItem]
       })
-      console.log(this.state.tasks)
     })
     .catch((data) => {
       console.log(data)
