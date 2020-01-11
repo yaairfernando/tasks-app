@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  before_action :set_task, only:[:mark_completed]
+
   def index
     
   end
@@ -9,7 +11,6 @@ class TasksController < ApplicationController
   end
 
   def mark_completed
-    @task = Task.find(params[:id])
     @task.completed = !@task.completed
     if @task.update(task_params)
       render json: { ok: "UPDATE", task: @task}
@@ -21,6 +22,8 @@ class TasksController < ApplicationController
   def create_task
     @task = Task.new(task_params)
     if @task.save
+      @task.created_at = @task.created_at.strftime("%d %m %y")
+      @task.updated_at = @task.updated_at.strftime("%d %m %y")
       render json: { ok: "CREATE", task: @task}
     else
       render json: { error: "There was an error"}
@@ -28,7 +31,9 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    
+    @task = Task.find(params[:id])
+    @task.destroy
+    render json: { ok: "DELETE" }
   end
 
   def about
@@ -39,5 +44,9 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:completed, :id, :title, :description)
+  end
+
+  def set_task
+    @task = Task.find(params[:id])
   end
 end

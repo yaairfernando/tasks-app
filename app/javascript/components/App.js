@@ -80,15 +80,28 @@ class App extends Component {
   }
 
   deleteTask = (id) => {
+    //LOCAL STATE
     // let newState = this.state.tasks.filter(f => f.id != id)
     // this.setState({ tasks: newState });
 
-    axios.delete(`http://jsonplaceholder.typicode.com/todos/${id}`)
-      .then((data) =>{
-        this.setState({
-          tasks: [...this.state.tasks.filter(f => f.id !== id)]
-        })
+    //USING JSON PLACEHOLDER
+    // axios.delete(`http://jsonplaceholder.typicode.com/todos/${id}`)
+    //   .then((data) =>{
+    //     this.setState({
+    //       tasks: [...this.state.tasks.filter(f => f.id !== id)]
+    //     })
+    //   })
+
+    //BACKEND
+    axios.delete('/destroy.json',{
+      data:{id}
+    })
+    .then((data) => {
+      this.setState({
+        tasks: [...this.state.tasks.filter(f => f.id !== id)]
       })
+      console.log(this.state.tasks)
+    })
   }
 
   addTodo = (title, description) => {
@@ -118,11 +131,14 @@ class App extends Component {
       description
     })
     .then((data) => {
+      console.log(data);
       const newItem = {
         title,
         description,
         completed: false,
-        id: data.data.task.id
+        id: data.data.task.id,
+        created_at: data.data.task.created_at,
+        updated_at: data.data.task.updated_at
       }
       this.setState({
         tasks: [...this.state.tasks, newItem]
