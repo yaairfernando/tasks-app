@@ -9,7 +9,8 @@ import Header from './Layout/Header';
 import TodoCreate from './TodoCreate';
 import About from './pages/About';
 
-
+const csrfToken = document.querySelector('[name="csrf-token"]').content
+axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
 
 const Body = styled.div`
   background: #916dd5;
@@ -53,14 +54,30 @@ class App extends Component {
   }
 
   markComplete = (id) => {
-    this.setState({
-      tasks: this.state.tasks.map(todo => {
-        if(todo.id === id) {
-          todo.completed = !todo.completed
-        }
-        return todo;
+    axios.post('/mark_completed.json', {
+      id: id
+    })
+    .then((data) => {
+      this.setState({
+        tasks: this.state.tasks.map(todo => {
+          if(todo.id === id) {
+            todo.completed = !todo.completed
+          }
+          return todo;
+        })
       })
     })
+    .catch((data) => {
+      console.log(data)
+    })
+    // this.setState({
+    //   tasks: this.state.tasks.map(todo => {
+    //     if(todo.id === id) {
+    //       todo.completed = !todo.completed
+    //     }
+    //     return todo;
+    //   })
+    // })
   }
 
   deleteTask = (id) => {

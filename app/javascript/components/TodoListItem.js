@@ -45,13 +45,14 @@ export class TodoListItem extends Component {
     }
   }
 
+
   
   render() {
     const { id, title, description, completed} = this.props.todo;
     return(
       <Card className="card mb-3">
         <Div className="card-body d-flex justify-content-between align-items-center">
-          <input type="checkbox" className="ml-2 mr-5" onChange={this.props.markComplete.bind(this, id)} />
+          <input type="checkbox" checked={completed} className="ml-2 mr-5" onChange={this.props.markComplete.bind(this, id)} />
           <div className="w-100 d-flex justify-content-between align-items-center">
             <div style={this.getStyle()}>
               <h5 className="card-title mb-0">{title}</h5>
