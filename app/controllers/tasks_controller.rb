@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   end
 
   def fetch_tasks
-    @tasks = Task.all.order('created_at DESC')
+    @tasks = Task.all.order('created_at ASC')
     render json: { tasks: @tasks }
   end
 
@@ -16,7 +16,20 @@ class TasksController < ApplicationController
     else
       render json: { error: "There was an error"}
     end
-  end 
+  end
+
+  def create_task
+    @task = Task.new(task_params)
+    if @task.save
+      render json: { ok: "CREATE", task: @task}
+    else
+      render json: { error: "There was an error"}
+    end
+  end
+
+  def destroy
+    
+  end
 
   def about
 
@@ -25,6 +38,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:completed, :id)
+    params.require(:task).permit(:completed, :id, :title, :description)
   end
 end

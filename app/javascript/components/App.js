@@ -43,7 +43,6 @@ class App extends Component {
     // Getting the data from the back with ruby
     axios.get('/fetch_tasks.json')
       .then((data) => {
-        console.log(data)
         this.setState({
           tasks: data.data.tasks
         })
@@ -93,6 +92,7 @@ class App extends Component {
   }
 
   addTodo = (title, description) => {
+    //LOCAL STATE
     // const newTodo = {
     //   id: uuid.v4(),
     //   title,
@@ -101,14 +101,36 @@ class App extends Component {
     // }
     // this.setState({ tasks: [...this.state.tasks, newTodo]})
 
-    axios.post('http://jsonplaceholder.typicode.com/todos', {
-      id: uuid.v4(),
+    // USING JSONPLACEHOLDER
+    // axios.post('http://jsonplaceholder.typicode.com/todos', {
+    //   id: uuid.v4(),
+    //   title,
+    //   description,
+    //   completed: false
+    // })
+    // .then((data) => {
+    //   this.setState({ tasks: [...this.state.tasks, data.data] })
+    // })
+
+    //BACKEND
+    axios.post('/create_task.json', {
       title,
-      description,
-      completed: false
+      description
     })
     .then((data) => {
-      this.setState({ tasks: [...this.state.tasks, data.data] })
+      const newItem = {
+        title,
+        description,
+        completed: false,
+        id: data.data.task.id
+      }
+      this.setState({
+        tasks: [...this.state.tasks, newItem]
+      })
+      console.log(this.state.tasks)
+    })
+    .catch((data) => {
+      console.log(data)
     })
   }
 
