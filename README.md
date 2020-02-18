@@ -130,7 +130,7 @@ user@pc:~/tasks-app$ rails db:migrate
 
 Run this command if you encountered a problem runing rails db:migrate
 
-```
+```Shell
 user@pc:~/tasks-app$ bundle exec rails db:migrate
 ```
 
