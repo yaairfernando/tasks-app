@@ -23,11 +23,11 @@ class TasksController < ApplicationController
   def create_task
     @task = Task.new(task_params)
     if @task.save
-      @task.created_at = @task.created_at.strftime("%d %m %y")
-      @task.updated_at = @task.updated_at.strftime("%d %m %y")
+      @task.created_at = @task.created_at.strftime('%B %d %Y')
+      @task.updated_at = @task.updated_at.strftime('%B %d %Y')
       render json: { ok: "CREATE", task: @task}
     else
-      render json: { error: "There was an error"}
+      render json: { errors: @task.errors.full_messages }
     end
   end
 

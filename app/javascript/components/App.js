@@ -24,7 +24,8 @@ class App extends Component {
         // {id: uuid.v4(), title: "This is a tak", description: "Go to the library", completed: false },
         // {id: uuid.v4(), title: "I have to do this now", description: "Go to the gym", completed: false },
         // {id: uuid.v4(), title: "I am in a hurry", description: "Cook some food", completed: false }
-      ]
+      ],
+      errorMessage: null
     }
   }
 
@@ -104,7 +105,7 @@ class App extends Component {
     })
   }
 
-  addTodo = (title, description) => {
+  addTodo = async (title, description) => {
     //LOCAL STATE
     // const newTodo = {
     //   id: uuid.v4(),
@@ -126,11 +127,11 @@ class App extends Component {
     // })
 
     //BACKEND
-    axios.post('/create_task.json', {
-      title,
-      description
-    })
-    .then((data) => {
+    try {
+      let data = await axios.post('/create_task.json', {
+        title,
+        description
+      })
       const newItem = {
         title,
         description,
@@ -142,10 +143,25 @@ class App extends Component {
       this.setState({
         tasks: [...this.state.tasks, newItem]
       })
-    })
-    .catch((data) => {
-      console.log(data)
-    })
+    } catch (error) {
+      console.log("THere is an error: ", error);
+    }
+    // .then((data) => {
+    //   const newItem = {
+    //     title,
+    //     description,
+    //     completed: false,
+    //     id: data.data.task.id,
+    //     created_at: data.data.task.created_at,
+    //     updated_at: data.data.task.updated_at
+    //   }
+    //   this.setState({
+    //     tasks: [...this.state.tasks, newItem]
+    //   })
+    // })
+    // .catch((data) => {
+    //   console.log(data)
+    // })
   }
 
 
@@ -156,7 +172,7 @@ class App extends Component {
           <Header />
           <Route exact path="/" render={props => (
             <React.Fragment>
-              <TodoCreate addTodo={this.addTodo} />
+              <TodoCreate addTodo={this.addTodo} error={this.state.errorMessage} />
               <Todo 
                 todos={this.state.tasks} 
                 markComplete={this.markComplete} 
