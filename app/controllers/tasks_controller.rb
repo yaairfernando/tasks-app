@@ -7,7 +7,8 @@ class TasksController < ApplicationController
 
   def fetch_tasks
     @tasks = Task.all.order('created_at ASC')
-    render json: { tasks: @tasks }
+    tasks = formatDate(@tasks)
+    render json: { tasks: tasks }
   end
 
   def mark_completed
